@@ -7,6 +7,8 @@ import ListTodos from "./components/todo/ListTodos";
 import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Todo from "./components/todo/Todo";
+import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,10 +18,13 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<ListTodos />}></Route>
+          <Route path="/" element={<Login />}></Route>
           <Route path="/todos" element={<ListTodos />}></Route>
           <Route path="/add-todo" element={<Todo />} />
           <Route path="/update-todo/:id" element={<Todo />} />
+          {/* http://localhost:8080/register  */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>

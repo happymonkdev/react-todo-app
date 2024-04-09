@@ -1,5 +1,15 @@
 import axios from "axios";
+import { getToken } from "./AuthService";
 const BASE_REST_API_URL = "http://localhost:8080/api/todos";
+axios.interceptors.request.use(
+  (config) => {
+    config.headers["Authorization"] = getToken();
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 export const getAllTodos = () => axios.get(BASE_REST_API_URL);
 export const addTodo = (request) => axios.post(BASE_REST_API_URL, request);

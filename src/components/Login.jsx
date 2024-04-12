@@ -11,14 +11,15 @@ const Login = () => {
   const [userNameOrEmail, setUserNameOrEmail] = useState();
   const [password, setPassword] = useState();
   const navigator = useNavigate();
-  const doLogin = (e) => {
+  async function doLogin(e) {
     e.preventDefault();
     console.log(e);
     const credentials = [userNameOrEmail, password];
-    loginAPICall(userNameOrEmail, password)
+    await loginAPICall(userNameOrEmail, password)
       .then((res) => {
         console.log(res.data);
-        const token = "Basic " + window.btoa(userNameOrEmail + ":" + password);
+        // const token = "Basic " + window.btoa(userNameOrEmail + ":" + password);
+        const token = "Bearer " + res.data.accessToken;
         console.log("token is  ", token);
         storeToken(token);
         saveLoggedInUser(userNameOrEmail);
@@ -27,7 +28,7 @@ const Login = () => {
         window.location.reload(false);
       })
       .catch((err) => console.log(err));
-  };
+  }
 
   return (
     <div className="container">
